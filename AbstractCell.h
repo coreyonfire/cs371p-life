@@ -1,3 +1,5 @@
+#include Life.h
+
 class AbstractCell {
 	friend bool operator == (const AbstractCell& lhs, const AbstractCell& rhs) {
 		return lhs.equals(rhs);
@@ -61,5 +63,5 @@ std::istream& AbstractCell::read (std::istream& in) {
 }
 
 std::ostream& AbstractCell::write (std::ostream& out) const {
-    return out << "Cell alive: " << _alive;
+    return out ;
 }

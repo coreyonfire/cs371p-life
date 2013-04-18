@@ -7,20 +7,30 @@ protected:
         virtual bool equals (const AbstractCell& that) const {
             if (const ConwayCell* const p = dynamic_cast<const ConwayCell*>(&that))
                 return AbstractCell::equals(*p);
-            return false;}
+            return false;
+		}
 
         virtual std::istream& read (std::istream& in) {
-            return AbstractCell::read(in);}
+            return AbstractCell::read(in);
+		}
 
         virtual std::ostream& write (std::ostream& out) const {
-            return AbstractCell::write(out);}
+            if (_alive) return AbstractCell::write(out) << "*";
+			else return AbstractCell::write(out) << ".";
+		}
 public:
 	ConwayCell(bool alive, Life* world) : 
 		AbstractCell(alive, world)
 		{}
 	
-	virtual bool mutate() {
-		//check for neighbors, act accordingly
+	virtual bool grow(int a, int d) {
+		int zooeyDeschanel = a+d;
+		if (zooeyDeschanel < 3 || zooeyDeschanel > 3) {
+			_alive = 0;
+		}
+		else {
+			_alive = 1;
+		}
 	}
 	virtual ConwayCell* clone () const {
 		return new ConwayCell(*this);

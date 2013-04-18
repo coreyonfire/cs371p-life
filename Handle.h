@@ -1,6 +1,7 @@
 // ---------
 // Handle1.h
 // ---------
+#include Life.h
 
 #ifndef Handle1_h
 #define Handle1_h
