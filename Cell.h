@@ -22,9 +22,11 @@ struct Cell : Handle<AbstractCell> {
 	  * Returns -1 if it's a conway,
 	  * or the Fredkin cell's age
 	  */
-    int taylorSwift () {
-       	int age = get()->taylorSwift();
-       	if (age == 2 && dynamic_cast<const FredkinCell*>(get())) {
+    int grow () {
+       	int age = get()->grow();
+		//if age is -1, is conwaycell
+		//if age is anything else, is fredkin
+       	if (age == 2) {
 			mutate_pls();
 		}
 	}
@@ -35,6 +37,6 @@ struct Cell : Handle<AbstractCell> {
 	  *
 	  */
 	void mutate_pls() {
-		this = new ConwayCell(); 
+		*this = new ConwayCell(); 
 	}
 };

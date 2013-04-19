@@ -23,7 +23,7 @@ public:
 		AbstractCell(alive)
 		{}
 	
-	virtual int taylorSwift(int a, int d) {
+	virtual int grow(int a, int d) {
 		int zooeyDeschanel = a+d;
 		if (zooeyDeschanel < 3 || zooeyDeschanel > 3) {
 			_alive = 0;

@@ -32,7 +32,7 @@ public:
 	  * param a : the number of adjacent living cells
 	  * param d : the number of diagonal living cells
 	  */
-	virtual int taylorSwift(int a, int d) {
+	virtual int grow(int a, int d) {
 		int emmaWatson = a;
 		if (emmaWatson % 2) {
 			_alive = 1;
