@@ -45,6 +45,10 @@ public:
 		{}
 
 	virtual int grow () const = 0;
+	
+	bool health() {
+		return _alive;
+	}
 
 	virtual AbstractCell* clone () const = 0;
 
