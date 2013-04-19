@@ -17,7 +17,6 @@ private:
 	vector<neighbors> neighbors() {
 		vector<neighbors>(_h*_w);
 		//loop through _cells and fill with neighbor counts
-		
 	}
 	
 public:

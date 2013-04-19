@@ -19,10 +19,12 @@ class AbstractCell {
 
 private:
 	bool _alive;
+	Life *_world;
 
 protected:
 	AbstractCell& operator = (const AbstractCell& that) {
 		_alive = that._alive;
+		_world = that._world;
 		return *this;
 	}
 
@@ -33,12 +35,14 @@ protected:
 	virtual std::ostream& write (std::ostream& out) const = 0;
 
 public:
-	AbstractCell (bool alive) :
-			_alive(input)
+	AbstractCell (bool input, Life *environment) :
+			_alive(input),
+			_world(environment)
 		{}
 /*
 	AbstractCell (const AbstractCell& that) :
-			_alive (that._alive)
+			_alive (that._alive),
+			_world (that._world)
 		{}
 */
 	virtual ~AbstractCell ()
@@ -51,13 +55,13 @@ public:
 };
 
 bool AbstractCell::equals (const AbstractCell& that) const {
-    return (_alive == that._alive);
+    return (_alive == that._alive) && (_world == that._world);
 }
 
 std::istream& AbstractCell::read (std::istream& in) {
-    return in >> _alive;
+    return in >> _alive >> _world;
 }
 
 std::ostream& AbstractCell::write (std::ostream& out) const {
-    return out;
+    return out ;
 }

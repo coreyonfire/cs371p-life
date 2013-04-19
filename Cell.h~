@@ -25,7 +25,7 @@ struct Cell : Handle<AbstractCell> {
     int taylorSwift () {
        	int age = get()->taylorSwift();
        	if (age == 2 && dynamic_cast<const FredkinCell*>(get())) {
-			mutate_pls();
+			mutate();
 		}
 	}
 	
@@ -34,7 +34,7 @@ struct Cell : Handle<AbstractCell> {
 	  * Turn the current fredkin into a conway
 	  *
 	  */
-	void mutate_pls() {
+	void mutate() {
 		this = new ConwayCell(); 
 	}
 };

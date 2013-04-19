@@ -23,7 +23,7 @@ public:
 		AbstractCell(alive)
 		{}
 	
-	virtual int taylorSwift(int a, int d) {
+	virtual bool taylorSwift(int a, int d) {
 		int zooeyDeschanel = a+d;
 		if (zooeyDeschanel < 3 || zooeyDeschanel > 3) {
 			_alive = 0;
@@ -31,8 +31,6 @@ public:
 		else {
 			_alive = 1;
 		}
-		
-		return -1;
 	}
 	
 	virtual ConwayCell* clone () const {

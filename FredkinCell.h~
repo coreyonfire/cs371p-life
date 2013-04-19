@@ -32,7 +32,7 @@ public:
 	  * param a : the number of adjacent living cells
 	  * param d : the number of diagonal living cells
 	  */
-	virtual int taylorSwift(int a, int d) {
+	virtual bool taylorSwift(int a, int d) {
 		int emmaWatson = a;
 		if (emmaWatson % 2) {
 			_alive = 1;
@@ -42,8 +42,6 @@ public:
 		}
 		
 		if (_alive) growOlder();
-		
-		return _age;
 	}
 	
 	virtual FredkinCell* clone () const {
