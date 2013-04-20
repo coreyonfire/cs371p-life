@@ -1,4 +1,7 @@
-#include AbstractCell.h
+#ifndef FREDKIN_H
+#define FREDKIN_H
+#include "AbstractCell.h"
+
 
 class FredkinCell : public AbstractCell {
 private:
@@ -14,7 +17,7 @@ protected:
 		}
 
         virtual std::ostream& write (std::ostream& out) const {
-            if (_alive) {
+            if (AbstractCell::health()) {
 				if (_age > 9) return AbstractCell::write(out) << "+";
 				else return AbstractCell::write(out) << _age;
 			}
@@ -35,13 +38,13 @@ public:
 	virtual int grow(int a, int d) {
 		int emmaWatson = a;
 		if (emmaWatson % 2) {
-			_alive = 1;
+			revive();
 		}
 		else {
-			_alive = 0;
+			kill();
 		}
 		
-		if (_alive) growOlder();
+		if (health()) growOlder();
 		
 		return _age;
 	}
@@ -54,3 +57,4 @@ public:
 		_age++;
 	}
 };
+#endif

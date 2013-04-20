@@ -29,6 +29,13 @@ To document the program:
 #include <cassert>   // assert
 #include <iostream>  // cout, endl
 #include <stdexcept> // invalid_argument, out_of_range
+#include <fstream>
+#include <vector>
+#include "AbstractCell.h"
+#include "Cell.h"
+#include "Life.h"
+
+
 
 // ----
 // main
@@ -54,11 +61,55 @@ int main () {
         Simulate 2177 moves.
         Print the 2500th grid.
         */
-        }
+		
+		//set up i/o
+		int h, w;
+		ifstream input;
+		input.open("RunLifeConway.in");
+		input >> h;
+		input >> w;
+		char temp;
+		vector<ConwayCell> cells;
+		for (int i = 0; i < h*w; i++) {
+			input >> temp;
+			ConwayCell newCell;
+			switch (temp) {
+				case '.':
+					newCell = ConwayCell(false);
+					break;
+				case '*':
+					newCell = ConwayCell(true);
+					break;
+				default :
+					//new line character or garbage, disregard
+					break;
+			}
+			cells.push_back(newCell);
+		}
+		//board is populated
+		//cout << "Vector created." <<endl;
+		Life<ConwayCell> life(h, w, cells);
+		//cout << "Running now." << endl;
+		cout << life << endl;
+		for (int i = 0; i < 10; i++) {
+			life.run();
+			cout << life << endl;
+		}
+		life.run(273);
+		cout << life <<endl;
+		life.run(40);
+		cout << life << endl;
+		life.run(2177);
+		cout << life << endl;
+    }
     catch (const invalid_argument&) {
-        assert(false);}
+		cout << "Invalid Argument!" << endl;
+        assert(false);
+	}
     catch (const out_of_range&) {
-        assert(false);}
+		cout << "Out of Range!" << endl;
+        assert(false);
+	}
 
     // ------------------
     // Fredkin Cell 20x20
@@ -94,4 +145,5 @@ int main () {
     catch (const out_of_range&) {
         assert(false);}
 
-    return 0;}
+    return 0;
+}

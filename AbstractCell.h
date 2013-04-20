@@ -1,4 +1,5 @@
-#include Life.h
+#ifndef ABSTRACTCELL_H
+#define ABSTRACTCELL_H
 
 class AbstractCell {
 	friend bool operator == (const AbstractCell& lhs, const AbstractCell& rhs) {
@@ -34,7 +35,7 @@ protected:
 
 public:
 	AbstractCell (bool alive) :
-			_alive(input)
+			_alive(alive)
 		{}
 /*
 	AbstractCell (const AbstractCell& that) :
@@ -44,12 +45,20 @@ public:
 	virtual ~AbstractCell ()
 		{}
 
-	virtual int grow () const = 0;
+	virtual int grow (int a, int d) = 0;
 	
-	bool health() {
+	bool health() const {
 		return _alive;
 	}
-
+	
+	void revive() {
+		_alive = 1;
+	}
+	
+	void kill() {
+		_alive = 0;
+	}
+	
 	virtual AbstractCell* clone () const = 0;
 
 };
@@ -65,3 +74,5 @@ std::istream& AbstractCell::read (std::istream& in) {
 std::ostream& AbstractCell::write (std::ostream& out) const {
     return out;
 }
+
+#endif

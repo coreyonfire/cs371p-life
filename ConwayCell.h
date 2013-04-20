@@ -1,4 +1,6 @@
-#include AbstractCell.h
+#ifndef CONWAY_H
+#define CONWAY_H
+#include "AbstractCell.h"
 
 class ConwayCell : public AbstractCell {
 private:
@@ -15,21 +17,21 @@ protected:
 		}
 
         virtual std::ostream& write (std::ostream& out) const {
-            if (_alive) return AbstractCell::write(out) << "*";
+            if (health()) return AbstractCell::write(out) << "*";
 			else return AbstractCell::write(out) << ".";
 		}
 public:
-	ConwayCell(bool alive) : 
+	ConwayCell(bool alive = 0) : 
 		AbstractCell(alive)
 		{}
 	
 	virtual int grow(int a, int d) {
 		int zooeyDeschanel = a+d;
 		if (zooeyDeschanel < 3 || zooeyDeschanel > 3) {
-			_alive = 0;
+			kill();
 		}
 		else {
-			_alive = 1;
+			revive();
 		}
 		
 		return -1;
@@ -39,3 +41,4 @@ public:
 		return new ConwayCell(*this);
 	}
 };
+#endif

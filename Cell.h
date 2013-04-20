@@ -1,4 +1,9 @@
+#ifndef CELL_H
+#define CELL_H
 #include "Handle.h"
+#include "AbstractCell.h"
+#include "ConwayCell.h"
+#include "FredkinCell.h"
 
 struct Cell : Handle<AbstractCell> {
     Cell (AbstractCell* p) :
@@ -22,21 +27,22 @@ struct Cell : Handle<AbstractCell> {
 	  * Returns -1 if it's a conway,
 	  * or the Fredkin cell's age
 	  */
-    int grow () {
-       	int age = get()->grow();
+    int grow (int a, int d) {
+       	int age = get()->grow(a, d);
 		//if age is -1, is conwaycell
 		//if age is anything else, is fredkin
        	if (age == 2) {
 			mutate_pls();
 		}
+		return age;
 	}
-	
 	
 	/** 
 	  * Turn the current fredkin into a conway
 	  *
 	  */
 	void mutate_pls() {
-		*this = new ConwayCell(); 
+		*this = new ConwayCell(1); 
 	}
 };
+#endif
