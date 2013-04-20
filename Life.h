@@ -30,7 +30,7 @@ private:
 		//loop through _cells and fill with neighbor counts
 		for (int i = 0; i < _h*_w; i++) {
 			neighbors cnd = {0, 0};
-			//std::cout<< "getting count for space " << i << " out of " <<_w*_h<< std::endl;
+			//std::cout<< "getting count for space (" << i/_w << ", " << i%_w << ")/"<<i<<" out of " <<_w*_h<< std::endl;
 			if (i >= _w) {
 				//check top, add to a
 				//std::cout << "Top" << std::endl;
@@ -52,9 +52,9 @@ private:
 				//check right, add to a
 				//std::cout << "Right" << std::endl;
 				cnd.a += _cells.at(i+1).health();
-				if (i < _h*(_w-1)) {
+				if (i/_w < _h-1) {
 					//check bottom right, add to d
-					//std::cout << "Bottom Right" << std::endl;
+					//std::cout << "Bottom Right " <<i/_w << ", " << _h-1 << std::endl;
 					cnd.d += _cells.at(i+_w+1).health();
 				}
 			}

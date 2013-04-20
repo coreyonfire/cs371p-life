@@ -24,7 +24,7 @@ protected:
 			else return AbstractCell::write(out) << "-";
 		}
 public:
-	FredkinCell(bool alive, int age = 0) : 
+	FredkinCell(bool alive = 0, int age = 0) : 
 		AbstractCell(alive),
 		_age (age)
 		{}
@@ -37,14 +37,18 @@ public:
 	  */
 	virtual int grow(int a, int d) {
 		int emmaWatson = a;
+		
+		
 		if (emmaWatson % 2) {
+			
+			if (health()) growOlder();
 			revive();
+			
 		}
 		else {
 			kill();
 		}
 		
-		if (health()) growOlder();
 		
 		return _age;
 	}

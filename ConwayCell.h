@@ -27,10 +27,10 @@ public:
 	
 	virtual int grow(int a, int d) {
 		int zooeyDeschanel = a+d;
-		if (zooeyDeschanel < 3 || zooeyDeschanel > 3) {
+		if (zooeyDeschanel < 2 || zooeyDeschanel > 3) {
 			kill();
 		}
-		else {
+		else if (zooeyDeschanel == 3) {
 			revive();
 		}
 		

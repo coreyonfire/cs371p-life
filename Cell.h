@@ -6,6 +6,11 @@
 #include "FredkinCell.h"
 
 struct Cell : Handle<AbstractCell> {
+
+	friend std::ostream& operator << (std::ostream& lhs, const Cell& rhs) {
+		return rhs.write(lhs);
+	}
+
     Cell (AbstractCell* p) :
             Handle<AbstractCell> (p)
         {}
@@ -37,12 +42,28 @@ struct Cell : Handle<AbstractCell> {
 		return age;
 	}
 	
+	bool health() const {
+		return get()->health();
+	}
+	
+	void kill() {
+		get()->kill();
+	}
+	
+	void revive() {
+		get()->revive();
+	}
+	
 	/** 
 	  * Turn the current fredkin into a conway
 	  *
 	  */
 	void mutate_pls() {
 		*this = new ConwayCell(1); 
+	}
+	
+	std::ostream& write (std::ostream& out) const {
+		return out << *get();
 	}
 };
 #endif

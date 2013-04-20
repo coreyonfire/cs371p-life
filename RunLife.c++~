@@ -376,14 +376,15 @@ int main () {
 			for (int i = 0; i < h*w; i++) {
 				input >> temp;
 				//cout << temp << ": ";
+				Cell newCell;
 				switch (temp) {
 					case '-':
 						//cout << "Adding dead, " << temp << endl;
-						cells.push_back(new FredkinCell(false));
+						newCell = new FredkinCell(false);
 						break;
 					case '+':
 						//cout << "Adding old, " << temp << endl;
-						cells.push_back(new FredkinCell(true, 10));
+						newCell = new FredkinCell(true, 10);
 						break;
 					case '1':
 					case '2':
@@ -396,12 +397,13 @@ int main () {
 					case '9':
 					case '0':
 						//cout << "Adding cell of age " << (int) temp << endl;
-						cells.push_back(new FredkinCell(true, atoi(&temp)));
+						newCell = new FredkinCell(true, atoi(&temp));
 						break;
 					default :
 						//new line character or garbage, disregard
 						break;
 				}
+				cells.push_back(newCell);
 			}
 			//board is populated
 			//cout << "Vector created." <<endl;
