@@ -26,6 +26,7 @@ To document the program:
 // includes
 // --------
 
+#define private public
 #include <cassert>   // assert
 #include <iostream>  // cout, endl
 #include <stdexcept> // invalid_argument, out_of_range
@@ -41,7 +42,12 @@ bool runWeekender = 0;
 bool runConwayMain = 0;
 bool runGun = 0;
 bool runFredkinMain = 0;
-bool runCellMain = 1;
+bool runCellMain = 0;
+bool runCell2 = 0;
+bool runCell3 = 0;
+bool runCell4 = 0;
+bool runCell5 = 0;
+bool runCell6 = 0;
 
 
 // ----
@@ -51,7 +57,6 @@ bool runCellMain = 1;
 int main () {
     using namespace std;
     ios_base::sync_with_stdio(false); // turn off synchronization with C I/O
-
 
 	//RUN GLIDER?
 	if (runGlider) {
@@ -301,7 +306,7 @@ int main () {
 			input.open("RunLifeFredkin.in");
 			input >> h;
 			input >> w;
-			char temp;
+			char temp = 0;
 			vector<FredkinCell> cells;
 			for (int i = 0; i < h*w; i++) {
 				input >> temp;
@@ -376,15 +381,20 @@ int main () {
 			for (int i = 0; i < h*w; i++) {
 				input >> temp;
 				//cout << temp << ": ";
-				Cell newCell;
 				switch (temp) {
+					case'.':
+						cells.push_back(new ConwayCell(false));
+						break;
+					case'*':
+						cells.push_back(new ConwayCell(true));
+						break;
 					case '-':
 						//cout << "Adding dead, " << temp << endl;
-						newCell = new FredkinCell(false);
+						cells.push_back(new FredkinCell(false));
 						break;
 					case '+':
 						//cout << "Adding old, " << temp << endl;
-						newCell = new FredkinCell(true, 10);
+						cells.push_back(new FredkinCell(true, 10));
 						break;
 					case '1':
 					case '2':
@@ -397,13 +407,12 @@ int main () {
 					case '9':
 					case '0':
 						//cout << "Adding cell of age " << (int) temp << endl;
-						newCell = new FredkinCell(true, atoi(&temp));
+						cells.push_back(new FredkinCell(true, atoi(&temp)));
 						break;
 					default :
 						//new line character or garbage, disregard
 						break;
 				}
-				cells.push_back(newCell);
 			}
 			//board is populated
 			//cout << "Vector created." <<endl;
@@ -414,6 +423,376 @@ int main () {
 				life.run();
 				cout << life << endl;
 			}
+		    
+		    }
+		catch (const invalid_argument&) {
+		    assert(false);}
+		catch (const out_of_range&) {
+		    assert(false);}
+	}
+	
+	if (runCell2) {
+		// ----------
+		// Cell 20x20
+		// ----------
+
+		try {
+		    cout << "*** Life<Cell> part 2 20x20 ***" << endl;
+		    /*
+		    read RunLifeCell.in // assume all Fredkin cells
+		    Simulate 5 moves.
+		    Print every grid (i.e. 0, 1, 2...5)
+		    */
+		    
+		    //set up i/o
+			int h, w;
+			ifstream input;
+			input.open("RunLifeCell2.in");
+			input >> h;
+			input >> w;
+			char temp;
+			vector<Cell> cells;
+			for (int i = 0; i < h*w; i++) {
+				input >> temp;
+				//cout << temp << ": ";
+				switch (temp) {
+					case'.':
+						cells.push_back(new ConwayCell(false));
+						break;
+					case'*':
+						cells.push_back(new ConwayCell(true));
+						break;
+					case '-':
+						//cout << "Adding dead, " << temp << endl;
+						cells.push_back(new FredkinCell(false));
+						break;
+					case '+':
+						//cout << "Adding old, " << temp << endl;
+						cells.push_back(new FredkinCell(true, 10));
+						break;
+					case '1':
+					case '2':
+					case '3':
+					case '4':
+					case '5':
+					case '6':
+					case '7':
+					case '8':
+					case '9':
+					case '0':
+						//cout << "Adding cell of age " << (int) temp << endl;
+						cells.push_back(new FredkinCell(true, atoi(&temp)));
+						break;
+					default :
+						//new line character or garbage, disregard
+						break;
+				}
+			}
+			//board is populated
+			//cout << "Vector created." <<endl;
+			Life<Cell> life(h, w, cells);
+			//cout << "Running now." << endl;
+			cout << life << endl;
+			for (int i = 0; i < 1; i++) {
+				life.run();
+			}
+			cout << life << endl;
+		    
+		    }
+		catch (const invalid_argument&) {
+		    assert(false);}
+		catch (const out_of_range&) {
+		    assert(false);}
+	}
+	
+	if (runCell3) {
+		// ----------
+		// Cell 20x20
+		// ----------
+
+		try {
+		    cout << "*** Life<Cell> 5x5 ***" << endl;
+		    /*
+		    read RunLifeCell.in // assume all Fredkin cells
+		    Simulate 5 moves.
+		    Print every grid (i.e. 0, 1, 2...5)
+		    */
+		    
+		    //set up i/o
+			int h, w;
+			ifstream input;
+			input.open("RunLifeCell3.in");
+			input >> h;
+			input >> w;
+			char temp;
+			vector<Cell> cells;
+			for (int i = 0; i < h*w; i++) {
+				input >> temp;
+				//cout << temp << ": ";
+				switch (temp) {
+					case'.':
+						cells.push_back(new ConwayCell(false));
+						break;
+					case'*':
+						cells.push_back(new ConwayCell(true));
+						break;
+					case '-':
+						//cout << "Adding dead, " << temp << endl;
+						cells.push_back(new FredkinCell(false));
+						break;
+					case '+':
+						//cout << "Adding old, " << temp << endl;
+						cells.push_back(new FredkinCell(true, 10));
+						break;
+					case '1':
+					case '2':
+					case '3':
+					case '4':
+					case '5':
+					case '6':
+					case '7':
+					case '8':
+					case '9':
+					case '0':
+						//cout << "Adding cell of age " << (int) temp << endl;
+						cells.push_back(new FredkinCell(true, atoi(&temp)));
+						break;
+					default :
+						//new line character or garbage, disregard
+						break;
+				}
+			}
+			//board is populated
+			//cout << "Vector created." <<endl;
+			Life<Cell> life(h, w, cells);
+			//cout << "Running now." << endl;
+			cout << life << endl;
+			for (int i = 0; i < 10; i++) {
+				life.run();
+			}
+			cout << life << endl;
+		    
+		    }
+		catch (const invalid_argument&) {
+		    assert(false);}
+		catch (const out_of_range&) {
+		    assert(false);}
+	}
+	
+	if (runCell4) {
+		// ----------
+		// Cell 20x20
+		// ----------
+
+		try {
+		    cout << "*** Life<Cell> part three 20x20 ***" << endl;
+		    /*
+		    read RunLifeCell.in // assume all Fredkin cells
+		    Simulate 5 moves.
+		    Print every grid (i.e. 0, 1, 2...5)
+		    */
+		    
+		    //set up i/o
+			int h, w;
+			ifstream input;
+			input.open("RunLifeCell4.in");
+			input >> h;
+			input >> w;
+			char temp;
+			vector<Cell> cells;
+			for (int i = 0; i < h*w; i++) {
+				input >> temp;
+				//cout << temp << ": ";
+				switch (temp) {
+					case'.':
+						cells.push_back(new ConwayCell(false));
+						break;
+					case'*':
+						cells.push_back(new ConwayCell(true));
+						break;
+					case '-':
+						//cout << "Adding dead, " << temp << endl;
+						cells.push_back(new FredkinCell(false));
+						break;
+					case '+':
+						//cout << "Adding old, " << temp << endl;
+						cells.push_back(new FredkinCell(true, 10));
+						break;
+					case '1':
+					case '2':
+					case '3':
+					case '4':
+					case '5':
+					case '6':
+					case '7':
+					case '8':
+					case '9':
+					case '0':
+						//cout << "Adding cell of age " << (int) temp << endl;
+						cells.push_back(new FredkinCell(true, atoi(&temp)));
+						break;
+					default :
+						//new line character or garbage, disregard
+						break;
+				}
+			}
+			//board is populated
+			//cout << "Vector created." <<endl;
+			Life<Cell> life(h, w, cells);
+			//cout << "Running now." << endl;
+			cout << life << endl;
+			for (int i = 0; i < 10; i++) {
+				life.run();
+			}
+			cout << life << endl;
+		    
+		    }
+		catch (const invalid_argument&) {
+		    assert(false);}
+		catch (const out_of_range&) {
+		    assert(false);}
+	}
+	
+	if (runCell5) {
+		// ----------
+		// Cell 20x20
+		// ----------
+
+		try {
+		    cout << "*** Life<Cell> 30x69 ***" << endl;
+		    /*
+		    read RunLifeCell.in // assume all Fredkin cells
+		    Simulate 5 moves.
+		    Print every grid (i.e. 0, 1, 2...5)
+		    */
+		    
+		    //set up i/o
+			int h, w;
+			ifstream input;
+			input.open("RunLifeCell5.in");
+			input >> h;
+			input >> w;
+			char temp;
+			vector<Cell> cells;
+			for (int i = 0; i < h*w; i++) {
+				input >> temp;
+				//cout << temp << ": ";
+				switch (temp) {
+					case'.':
+						cells.push_back(new ConwayCell(false));
+						break;
+					case'*':
+						cells.push_back(new ConwayCell(true));
+						break;
+					case '-':
+						//cout << "Adding dead, " << temp << endl;
+						cells.push_back(new FredkinCell(false));
+						break;
+					case '+':
+						//cout << "Adding old, " << temp << endl;
+						cells.push_back(new FredkinCell(true, 10));
+						break;
+					case '1':
+					case '2':
+					case '3':
+					case '4':
+					case '5':
+					case '6':
+					case '7':
+					case '8':
+					case '9':
+					case '0':
+						//cout << "Adding cell of age " << (int) temp << endl;
+						cells.push_back(new FredkinCell(true, atoi(&temp)));
+						break;
+					default :
+						//new line character or garbage, disregard
+						break;
+				}
+			}
+			//board is populated
+			//cout << "Vector created." <<endl;
+			Life<Cell> life(h, w, cells);
+			//cout << "Running now." << endl;
+			cout << life << endl;
+			for (int i = 0; i < 10; i++) {
+				life.run();
+			}
+			cout << life << endl;
+		    
+		    }
+		catch (const invalid_argument&) {
+		    assert(false);}
+		catch (const out_of_range&) {
+		    assert(false);}
+	}
+	
+	if (runCell6) {
+		// ----------
+		// Cell 20x20
+		// ----------
+
+		try {
+		    cout << "*** Life<Cell> 20x25 ***" << endl;
+		    /*
+		    read RunLifeCell.in // assume all Fredkin cells
+		    Simulate 5 moves.
+		    Print every grid (i.e. 0, 1, 2...5)
+		    */
+		    
+		    //set up i/o
+			int h, w;
+			ifstream input;
+			input.open("RunLifeCell6.in");
+			input >> h;
+			input >> w;
+			char temp;
+			vector<Cell> cells;
+			for (int i = 0; i < h*w; i++) {
+				input >> temp;
+				//cout << temp << ": ";
+				switch (temp) {
+					case'.':
+						cells.push_back(new ConwayCell(false));
+						break;
+					case'*':
+						cells.push_back(new ConwayCell(true));
+						break;
+					case '-':
+						//cout << "Adding dead, " << temp << endl;
+						cells.push_back(new FredkinCell(false));
+						break;
+					case '+':
+						//cout << "Adding old, " << temp << endl;
+						cells.push_back(new FredkinCell(true, 10));
+						break;
+					case '1':
+					case '2':
+					case '3':
+					case '4':
+					case '5':
+					case '6':
+					case '7':
+					case '8':
+					case '9':
+					case '0':
+						//cout << "Adding cell of age " << (int) temp << endl;
+						cells.push_back(new FredkinCell(true, atoi(&temp)));
+						break;
+					default :
+						//new line character or garbage, disregard
+						break;
+				}
+			}
+			//board is populated
+			//cout << "Vector created." <<endl;
+			Life<Cell> life(h, w, cells);
+			//cout << "Running now." << endl;
+			cout << life << endl;
+			for (int i = 0; i < 10; i++) {
+				life.run();
+			}
+			cout << life << endl;
 		    
 		    }
 		catch (const invalid_argument&) {

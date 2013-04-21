@@ -800,7 +800,7 @@ struct TestLife : CppUnit::TestFixture {
     CPPUNIT_TEST(test_cell18);
     CPPUNIT_TEST(test_cell19);
     CPPUNIT_TEST(test_cell20);
-    CPPUNIT_TEST(test_mutate_pls);
+    
     CPPUNIT_TEST_SUITE_END();
 };
 

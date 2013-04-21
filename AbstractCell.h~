@@ -1,4 +1,5 @@
-#include Life.h
+#ifndef ABSTRACTCELL_H
+#define ABSTRACTCELL_H
 
 class AbstractCell {
 	friend bool operator == (const AbstractCell& lhs, const AbstractCell& rhs) {
@@ -19,12 +20,10 @@ class AbstractCell {
 
 private:
 	bool _alive;
-	Life *_world;
 
 protected:
 	AbstractCell& operator = (const AbstractCell& that) {
 		_alive = that._alive;
-		_world = that._world;
 		return *this;
 	}
 
@@ -35,33 +34,46 @@ protected:
 	virtual std::ostream& write (std::ostream& out) const = 0;
 
 public:
-	AbstractCell (bool input, Life *environment) :
-			_alive(input),
-			_world(environment)
-		{}
+	AbstractCell (bool alive) :
+			_alive(alive)
+		{_alive = alive;
+		std::cout << "Abstract: " << alive << std::endl;}
 /*
 	AbstractCell (const AbstractCell& that) :
-			_alive (that._alive),
-			_world (that._world)
+			_alive (that._alive)
 		{}
 */
 	virtual ~AbstractCell ()
 		{}
 
-	virtual int grow () const = 0;
-
+	virtual int grow (int a, int d) = 0;
+	
+	bool health() const {
+		return _alive;
+	}
+	
+	void revive() {
+		_alive = 1;
+	}
+	
+	void kill() {
+		_alive = 0;
+	}
+	
 	virtual AbstractCell* clone () const = 0;
 
 };
 
 bool AbstractCell::equals (const AbstractCell& that) const {
-    return (_alive == that._alive) && (_world == that._world);
+    return (_alive == that._alive);
 }
 
 std::istream& AbstractCell::read (std::istream& in) {
-    return in >> _alive >> _world;
+    return in >> _alive;
 }
 
 std::ostream& AbstractCell::write (std::ostream& out) const {
-    return out ;
+    return out;
 }
+
+#endif

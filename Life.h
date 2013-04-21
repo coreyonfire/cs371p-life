@@ -76,6 +76,7 @@ private:
 				//std::cout << "Left" << std::endl;
 				cnd.a += _cells.at(i-1).health();
 			}
+			assert(cnd.a + cnd.d < 9);
 			//now have neighborcount, add to array
 			n.push_back(cnd);
 		}
@@ -90,6 +91,11 @@ private:
 		}
 		return pop;
 	}
+	
+	int generation() const {
+		return _generation;
+	}
+	
 protected:
 	std::ostream& write (std::ostream& out) const {
 		//write a print method
@@ -107,11 +113,13 @@ public:
 		_generation(0),
 		_h(h),
 		_w(w) 
-		{}
+		{if (h < 1 || w < 1) throw -1;}
+		
 		
 	
 	void run(int gens = 1) {
 		//run gens genrations of life
+		if (gens < 1) gens = 1;
 		for (int i = 0; i < gens; i++) {
 			vector<neighbors> n = neighborCount();
 			//std::cout << "Neighbors created." << std::endl;

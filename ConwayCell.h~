@@ -30,7 +30,7 @@ public:
 		if (zooeyDeschanel < 2 || zooeyDeschanel > 3) {
 			kill();
 		}
-		else {
+		else if (zooeyDeschanel == 3) {
 			revive();
 		}
 		

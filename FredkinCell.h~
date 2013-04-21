@@ -38,16 +38,11 @@ public:
 	virtual int grow(int a, int d) {
 		int emmaWatson = a;
 		
-		
 		if (emmaWatson % 2) {
-			revive();
-			
 			if (health()) growOlder();
+			revive();
 		}
-		else {
-			kill();
-		}
-		
+		else kill();
 		
 		return _age;
 	}

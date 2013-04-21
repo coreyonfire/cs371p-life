@@ -26,6 +26,7 @@ public:
 		{}
 	
 	virtual int grow(int a, int d) {
+		if (a < 0 || d < 0) throw -1;
 		int zooeyDeschanel = a+d;
 		if (zooeyDeschanel < 2 || zooeyDeschanel > 3) {
 			kill();

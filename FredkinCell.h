@@ -6,6 +6,10 @@
 class FredkinCell : public AbstractCell {
 private:
 	int _age;
+	
+	void growOlder() {
+		_age++;
+	}
 protected:
         virtual bool equals (const AbstractCell& that) const {
             if (const FredkinCell* const p = dynamic_cast<const FredkinCell*>(&that))
@@ -38,27 +42,17 @@ public:
 	virtual int grow(int a, int d) {
 		int emmaWatson = a;
 		
-		
 		if (emmaWatson % 2) {
-			
 			if (health()) growOlder();
 			revive();
-			
 		}
-		else {
-			kill();
-		}
-		
+		else kill();
 		
 		return _age;
 	}
 	
 	virtual FredkinCell* clone () const {
 		return new FredkinCell(*this);
-	}
-	
-	void growOlder() {
-		_age++;
 	}
 };
 #endif
