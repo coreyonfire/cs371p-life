@@ -1,1 +1,10 @@
-#
+g++ -pedantic -std=c++0x -Wall AbstractCell.c++ ConwayCell.c++ FredkinCell.c++ TestLife.c++ -o TestLife -lcppunit -ldl
+valgrind TestLife
+TestLife.c++
+...................................................
+
+
+OK (51 tests)
+
+
+Done.

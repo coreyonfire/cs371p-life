@@ -37,17 +37,18 @@ To document the program:
 #include "Life.h"
 
 
-bool runGlider = 1;
-bool runWeekender = 1;
-bool runConwayMain = 1;
-bool runGun = 1;
-bool runFredkinMain = 1;
-bool runCellMain = 1;
-bool runCell2 = 1;
-bool runCell3 = 1;
-bool runCell4 = 1;
-bool runCell5 = 1;
-bool runCell6 = 1;
+bool runGlider = 0;
+bool runWeekender = 0;
+bool runConwayMain = 0;
+bool runGun = 0;
+bool runFredkinMain = 0;
+bool runCellMain = 0;
+bool runCell2 = 0;
+bool runCell3 = 0;
+bool runCell4 = 0;
+bool runCell5 = 0;
+bool runCell6 = 0;
+bool runRose = 1;
 
 
 // ----
@@ -332,7 +333,7 @@ int main () {
 					case '9':
 					case '0':
 						//cout << "Adding cell of age " << (int) temp << endl;
-						newCell = FredkinCell(true, atoi(&temp));
+						newCell = FredkinCell(true, (int)( temp - '0'));
 						break;
 					default :
 						//new line character or garbage, disregard
@@ -407,7 +408,7 @@ int main () {
 					case '9':
 					case '0':
 						//cout << "Adding cell of age " << (int) temp << endl;
-						cells.push_back(new FredkinCell(true, atoi(&temp)));
+						cells.push_back(new FredkinCell(true, (int)( temp - '0')));
 						break;
 					default :
 						//new line character or garbage, disregard
@@ -481,7 +482,7 @@ int main () {
 					case '9':
 					case '0':
 						//cout << "Adding cell of age " << (int) temp << endl;
-						cells.push_back(new FredkinCell(true, atoi(&temp)));
+						cells.push_back(new FredkinCell(true, (int)( temp - '0')));
 						break;
 					default :
 						//new line character or garbage, disregard
@@ -555,7 +556,7 @@ int main () {
 					case '9':
 					case '0':
 						//cout << "Adding cell of age " << (int) temp << endl;
-						cells.push_back(new FredkinCell(true, atoi(&temp)));
+						cells.push_back(new FredkinCell(true, (int)( temp - '0')));
 						break;
 					default :
 						//new line character or garbage, disregard
@@ -629,7 +630,7 @@ int main () {
 					case '9':
 					case '0':
 						//cout << "Adding cell of age " << (int) temp << endl;
-						cells.push_back(new FredkinCell(true, atoi(&temp)));
+						cells.push_back(new FredkinCell(true, (int)( temp - '0')));
 						break;
 					default :
 						//new line character or garbage, disregard
@@ -703,7 +704,7 @@ int main () {
 					case '9':
 					case '0':
 						//cout << "Adding cell of age " << (int) temp << endl;
-						cells.push_back(new FredkinCell(true, atoi(&temp)));
+						cells.push_back(new FredkinCell(true, (int)( temp - '0')));
 						break;
 					default :
 						//new line character or garbage, disregard
@@ -777,7 +778,7 @@ int main () {
 					case '9':
 					case '0':
 						//cout << "Adding cell of age " << (int) temp << endl;
-						cells.push_back(new FredkinCell(true, atoi(&temp)));
+						cells.push_back(new FredkinCell(true, (int)( temp - '0')));
 						break;
 					default :
 						//new line character or garbage, disregard
@@ -793,6 +794,80 @@ int main () {
 				life.run();
 			}
 			cout << life << endl;
+		    
+		    }
+		catch (const invalid_argument&) {
+		    assert(false);}
+		catch (const out_of_range&) {
+		    assert(false);}
+	}
+	
+	if (runRose) {
+		// ----------
+		// Cell 20x20
+		// ----------
+
+		try {
+		    cout << "*** Life<Cell> 20x14 (ROSE) ***" << endl;
+		    /*
+		    read RunLifeCell.in // assume all Fredkin cells
+		    Simulate 5 moves.
+		    Print every grid (i.e. 0, 1, 2...5)
+		    */
+		    
+		    //set up i/o
+			int h, w;
+			ifstream input;
+			input.open("RunLifeRose.in");
+			input >> h;
+			input >> w;
+			char temp;
+			vector<Cell> cells;
+			for (int i = 0; i < h*w; i++) {
+				input >> temp;
+				//cout << temp << ": ";
+				switch (temp) {
+					case'.':
+						cells.push_back(new ConwayCell(false));
+						break;
+					case'*':
+						cells.push_back(new ConwayCell(true));
+						break;
+					case '-':
+						//cout << "Adding dead, " << temp << endl;
+						cells.push_back(new FredkinCell(false));
+						break;
+					case '+':
+						//cout << "Adding old, " << temp << endl;
+						cells.push_back(new FredkinCell(true, 10));
+						break;
+					case '1':
+					case '2':
+					case '3':
+					case '4':
+					case '5':
+					case '6':
+					case '7':
+					case '8':
+					case '9':
+					case '0':
+						//cout << "Adding cell of age " << (int) temp << endl;
+						cells.push_back(new FredkinCell(true, (int)( temp - '0')));
+						break;
+					default :
+						//new line character or garbage, disregard
+						break;
+				}
+			}
+			//board is populated
+			//cout << "Vector created." <<endl;
+			Life<Cell> life(h, w, cells);
+			//cout << "Running now." << endl;
+			cout << life << endl;
+			for (int i = 0; i < 5; i++) {
+				life.run();
+			cout << life << endl;
+			}
 		    
 		    }
 		catch (const invalid_argument&) {

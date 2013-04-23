@@ -131,7 +131,7 @@ struct TestLife : CppUnit::TestFixture {
 				case '8':
 				case '9':
 				case '0':
-					cells.push_back(new FredkinCell(true, atoi(&temp)));
+					cells.push_back(new FredkinCell(true, (int)( temp - '0')));
 					break;
 				default :
 					//new line character or garbage, disregard
@@ -179,7 +179,7 @@ struct TestLife : CppUnit::TestFixture {
 				case '8':
 				case '9':
 				case '0':
-					cells.push_back(new FredkinCell(true, atoi(&temp)));
+					cells.push_back(new FredkinCell(true, (int)( temp - '0')));
 					break;
 				default :
 					//new line character or garbage, disregard
@@ -228,7 +228,7 @@ struct TestLife : CppUnit::TestFixture {
 				case '8':
 				case '9':
 				case '0':
-					cells.push_back(new FredkinCell(true, atoi(&temp)));
+					cells.push_back(new FredkinCell(true, (int)( temp - '0')));
 					break;
 				default :
 					//new line character or garbage, disregard
@@ -276,7 +276,7 @@ struct TestLife : CppUnit::TestFixture {
 				case '8':
 				case '9':
 				case '0':
-					cells.push_back(new FredkinCell(true, atoi(&temp)));
+					cells.push_back(new FredkinCell(true, (int)( temp - '0')));
 					break;
 				default :
 					//new line character or garbage, disregard
@@ -325,7 +325,7 @@ struct TestLife : CppUnit::TestFixture {
 				case '8':
 				case '9':
 				case '0':
-					cells.push_back(new FredkinCell(true, atoi(&temp)));
+					cells.push_back(new FredkinCell(true, (int)( temp - '0')));
 					break;
 				default :
 					//new line character or garbage, disregard
@@ -373,7 +373,7 @@ struct TestLife : CppUnit::TestFixture {
 				case '8':
 				case '9':
 				case '0':
-					cells.push_back(new FredkinCell(true, atoi(&temp)));
+					cells.push_back(new FredkinCell(true, (int)( temp - '0')));
 					break;
 				default :
 					//new line character or garbage, disregard
@@ -423,7 +423,7 @@ struct TestLife : CppUnit::TestFixture {
 				case '8':
 				case '9':
 				case '0':
-					cells.push_back(new FredkinCell(true, atoi(&temp)));
+					cells.push_back(new FredkinCell(true, (int)( temp - '0')));
 					break;
 				default :
 					//new line character or garbage, disregard
@@ -475,7 +475,7 @@ struct TestLife : CppUnit::TestFixture {
 				case '8':
 				case '9':
 				case '0':
-					cells.push_back(new FredkinCell(true, atoi(&temp)));
+					cells.push_back(new FredkinCell(true, (int)( temp - '0')));
 					break;
 				default :
 					//new line character or garbage, disregard
